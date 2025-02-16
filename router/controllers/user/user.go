@@ -1,13 +1,14 @@
 package user
 
 import (
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/lib/page"
-	"bhbdev/jam/lib/pagination"
-	"bhbdev/jam/models"
-	"bhbdev/jam/services"
 	"net/http"
 	"strconv"
+
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/page"
+	"github.com/bhbdev/jam/lib/pagination"
+	"github.com/bhbdev/jam/models"
+	"github.com/bhbdev/jam/services"
 )
 
 // const (

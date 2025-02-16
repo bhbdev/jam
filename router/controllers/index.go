@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"bhbdev/jam/lib/page"
 	"net/http"
+
+	"github.com/bhbdev/jam/lib/page"
 )
 
 func Index(w http.ResponseWriter, r *http.Request) {

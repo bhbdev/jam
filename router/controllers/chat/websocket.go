@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"time"
 
-	"bhbdev/jam/lib/page"
+	"github.com/bhbdev/jam/lib/page"
 
 	"github.com/olahol/melody"
 	"github.com/ollama/ollama/api"

@@ -3,10 +3,10 @@ package services
 import (
 	"context"
 
-	"bhbdev/jam/lib/logger"
-	//"bhbdev/lib/util"
-	"bhbdev/jam/models"
-	"bhbdev/jam/services/repo"
+	"github.com/bhbdev/jam/lib/logger"
+	//"github.com/bhbdev/lib/util"
+	"github.com/bhbdev/jam/models"
+	"github.com/bhbdev/jam/services/repo"
 
 	"gorm.io/gorm"
 )

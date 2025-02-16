@@ -3,10 +3,10 @@ package database
 import (
 	"fmt"
 
-	"bhbdev/jam/config"
+	"github.com/bhbdev/jam/config"
 
-	gorm_postgres "bhbdev/jam/lib/gorm_postgres"
-	gorm_sqlite "bhbdev/jam/lib/gorm_sqlite"
+	gorm_postgres "github.com/bhbdev/jam/lib/gorm_postgres"
+	gorm_sqlite "github.com/bhbdev/jam/lib/gorm_sqlite"
 
 	"gorm.io/gorm"
 

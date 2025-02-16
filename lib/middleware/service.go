@@ -1,9 +1,10 @@
 package middleware
 
 import (
-	"bhbdev/jam/services"
 	"context"
 	"net/http"
+
+	"github.com/bhbdev/jam/services"
 )
 
 const ContextServices = ContextKey("services")

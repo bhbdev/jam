@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"bhbdev/jam/config"
-	"bhbdev/jam/lib/database"
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/models"
+	"github.com/bhbdev/jam/config"
+	"github.com/bhbdev/jam/lib/database"
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/models"
 
 	"github.com/spf13/cobra"
 	"gorm.io/gorm"

@@ -1,12 +1,13 @@
 package router
 
 import (
-	"bhbdev/jam/router/controllers"
-	"bhbdev/jam/router/controllers/chat"
-	"bhbdev/jam/router/controllers/jobapp"
-	"bhbdev/jam/router/controllers/user"
 	"context"
 	"net/http"
+
+	"github.com/bhbdev/jam/router/controllers"
+	"github.com/bhbdev/jam/router/controllers/chat"
+	"github.com/bhbdev/jam/router/controllers/jobapp"
+	"github.com/bhbdev/jam/router/controllers/user"
 )
 
 type Mux interface {

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"bhbdev/jam/config"
+	"github.com/bhbdev/jam/config"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

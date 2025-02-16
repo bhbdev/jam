@@ -1,12 +1,13 @@
 package jobapp
 
 import (
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/lib/page"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
+
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/page"
 
 	"github.com/google/uuid"
 )

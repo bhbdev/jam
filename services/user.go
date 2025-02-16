@@ -4,12 +4,12 @@ import (
 	"context"
 	"time"
 
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/lib/password"
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/password"
 
 	//"bhbdev/lib/util"
-	"bhbdev/jam/models"
-	"bhbdev/jam/services/repo"
+	"github.com/bhbdev/jam/models"
+	"github.com/bhbdev/jam/services/repo"
 
 	"gorm.io/gorm"
 )

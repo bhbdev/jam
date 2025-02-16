@@ -6,13 +6,13 @@ import (
 	"log/slog"
 	"os"
 
-	"bhbdev/jam/config"
-	"bhbdev/jam/lib/database"
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/lib/middleware"
-	"bhbdev/jam/lib/server"
-	"bhbdev/jam/router"
-	"bhbdev/jam/services"
+	"github.com/bhbdev/jam/config"
+	"github.com/bhbdev/jam/lib/database"
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/middleware"
+	"github.com/bhbdev/jam/lib/server"
+	"github.com/bhbdev/jam/router"
+	"github.com/bhbdev/jam/services"
 	//"bhbdev/jam/migrations"
 )
 

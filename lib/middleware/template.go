@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"bhbdev/jam/lib/logger"
 	"context"
 	"errors"
 	"fmt"
@@ -9,6 +8,8 @@ import (
 	"net/http"
 	"path/filepath"
 	"time"
+
+	"github.com/bhbdev/jam/lib/logger"
 )
 
 const (

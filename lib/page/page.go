@@ -7,10 +7,10 @@ import (
 	"io"
 	"log/slog"
 
-	"bhbdev/jam/lib/database"
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/lib/middleware"
-	"bhbdev/jam/services"
+	"github.com/bhbdev/jam/lib/database"
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/middleware"
+	"github.com/bhbdev/jam/services"
 )
 
 type Page struct {

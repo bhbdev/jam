@@ -3,7 +3,7 @@ package config
 import (
 	"fmt"
 
-	"bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/logger"
 
 	"github.com/spf13/viper"
 )

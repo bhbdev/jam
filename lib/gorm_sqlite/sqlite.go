@@ -3,7 +3,7 @@ package gorm_sqlite
 import (
 	"fmt"
 
-	"bhbdev/jam/config"
+	"github.com/bhbdev/jam/config"
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"

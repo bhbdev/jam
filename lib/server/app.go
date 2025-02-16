@@ -3,8 +3,8 @@ package server
 import (
 	"net/http"
 
-	"bhbdev/jam/config"
-	"bhbdev/jam/lib/middleware"
+	"github.com/bhbdev/jam/config"
+	"github.com/bhbdev/jam/lib/middleware"
 )
 
 type App struct {

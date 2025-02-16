@@ -1,10 +1,11 @@
 package user
 
 import (
-	"bhbdev/jam/lib/page"
-	"bhbdev/jam/models"
-	"bhbdev/jam/services"
 	"net/http"
+
+	"github.com/bhbdev/jam/lib/page"
+	"github.com/bhbdev/jam/models"
+	"github.com/bhbdev/jam/services"
 )
 
 func Register(w http.ResponseWriter, r *http.Request) {

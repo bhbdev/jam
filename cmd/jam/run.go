@@ -7,9 +7,9 @@ import (
 	"sync"
 	"syscall"
 
-	"bhbdev/jam/app"
-	"bhbdev/jam/config"
-	"bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/app"
+	"github.com/bhbdev/jam/config"
+	"github.com/bhbdev/jam/lib/logger"
 
 	"github.com/spf13/cobra"
 )

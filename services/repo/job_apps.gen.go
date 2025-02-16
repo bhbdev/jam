@@ -17,7 +17,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"bhbdev/jam/models"
+	"github.com/bhbdev/jam/models"
 )
 
 func newJobApp(db *gorm.DB, opts ...gen.DOOption) jobApp {

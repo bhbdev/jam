@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bhbdev/jam/models"
+	"github.com/bhbdev/jam/models"
 )
 
 func main() {

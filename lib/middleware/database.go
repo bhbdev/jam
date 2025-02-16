@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"bhbdev/jam/lib/database"
+	"github.com/bhbdev/jam/lib/database"
 )
 
 const ContextDatabase = ContextKey("database")

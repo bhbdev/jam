@@ -1,7 +1,7 @@
 package models
 
 import (
-	"bhbdev/jam/lib/pagination"
+	"github.com/bhbdev/jam/lib/pagination"
 )
 
 // Models that will be auto-migrated

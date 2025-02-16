@@ -1,13 +1,14 @@
 package jobapp
 
 import (
-	"bhbdev/jam/lib/logger"
-	"bhbdev/jam/lib/page"
-	"bhbdev/jam/lib/pagination"
-	"bhbdev/jam/models"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/bhbdev/jam/lib/logger"
+	"github.com/bhbdev/jam/lib/page"
+	"github.com/bhbdev/jam/lib/pagination"
+	"github.com/bhbdev/jam/models"
 )
 
 const (
