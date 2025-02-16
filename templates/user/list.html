@@ -1,0 +1,41 @@
+{{ define "user/list" }}
+
+<div class="container px-6 mx-auto grid">
+
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+     Users
+    </h2>
+
+{{ with .Users}}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{ range . }}
+                <tr>
+                    <td>{{ .Username }}</td>
+                    <td>{{ .Email }}</td>
+                    <td>{{ .Status }}</td>
+                    <td>
+                        <a href="/user/edit/{{ .ID }}" class="btn btn-primary">Edit</a>
+                        <a href="/user/delete/{{ .ID }}" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {{ end }}
+        </tbody>
+    </table>
+{{ else }}
+    <div class="flex items-center justify-center h-48 rounded-xl bg-white dark:bg-gray-800 dark:text-gray-400 shadow-lg">
+        <p>No users found</p>
+    </div>
+{{ end }}
+
+</div>
+
+{{ end }}

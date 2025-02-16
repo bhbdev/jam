@@ -1,0 +1,53 @@
+{{ define "header" -}}
+<!doctype html>
+<html :class="{ 'dark': dark }" x-data="data()" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>{{ with .Title }}{{ . }} | {{ end }}🍇JAM</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
+</head>
+<body hx-boost="true" hx-push-url="true" class="antialiased">
+    <div class="flex h-screen bg-gray-50 dark:bg-gray-900 " :class="{ 'overflow-hidden': isSideMenuOpen}">
+{{ end }}
+    
+	
+{{ define "page/header" }}
+    {{ template "header" . }}
+    {{ template "sidebar" . }}
+    <div class="flex flex-col flex-1">
+    {{ template "pageheader" .}}	
+        <main id="content" class="fade-in h-full pb-4 flex flex-col overflow-y-auto ">
+{{ end }}
+	
+{{ define "page/footer" }}		
+		<footer class="w-full text-sm text-slate-700 p-4 grow items-end flex justify-between">
+            <div>{{.AppName}} - version:{{.AppVersion}}</div>
+            <div>
+                &copy; {{ now.UTC.Year }} - 
+                <a href="https://github.com/bhbdev/" target="_blank" class="hover:text-slate-500">bhbdev <i class="fab fa-github"></i></a>
+            </div>
+        </footer>
+        </main>
+    </div>
+	{{ template "footer" . -}}
+{{ end }}
+	
+{{ define "footer" }}
+    </div>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="/assets/js/alpine-init.js"></script>
+    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx-ext-ws@2.0.1/ws.js"></script>
+    <script defer>
+        htmx.logger = function (elt, event, data) {
+        if (console) {
+            //console.log(event, elt, data);
+        }
+        };
+    </script>
+</body>
+</html>
+{{- end }}

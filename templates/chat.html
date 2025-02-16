@@ -1,0 +1,30 @@
+{{ define "chat" }}
+<div id="ws-chat" 
+    hx-ext="ws" 
+    ws-connect="/ws" 
+    hx-on:htmx:ws-after-message="c=document.getElementById('chat'); c.scrollTo({ top: c.scrollHeight, behavior: 'smooth' });"
+    class="flex flex-col flex-grow h-full"
+    >
+	<div class="messages flex flex-col flex-grow  w-full bg-white shadow-xl rounded-lg overflow-hidden p-4">
+		
+        <div id="chat" sse-swap="chat" hx-swap-oob="beforeend" class="flex flex-col flex-grow h-0 p-4 overflow-auto"></div>
+		<div id="spinner" class="htmx-indicator flex justify-center items-center h-10 w-full">
+            <svg class="animate-spin h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A8.001 8.001 0 0112 4V0C6.486 0 2 4.486 2 10h4v7.291z"></path>
+            </svg>
+        </div>
+		
+	</div>
+	
+	<form class="bg-gray-300 p-4" id="chatform" hx-target="#chat" hx-swap="beforeend" hx-indicator="#spinner" hx-on:submit="this.reset()" ws-send>
+    <input 
+			type="text" 
+			placeholder="Type your message..." 
+			class="flex items-center h-10 w-full rounded px-3 text-sm" 
+      name="user-message" 
+			id="user-message"  
+			/>
+  </form>
+</div>
+{{ end }}

@@ -1,0 +1,13 @@
+# This is the configuration file for the application.
+development: true
+server:
+  host: "0.0.0.0"
+  port: 9090
+database:
+  engine: "sqlite3"
+  name: "jam.db"
+#database:
+#  engine: "postgres"
+#  name: "jam"
+#  user: "pguser"
+#  password: "pgpass"
