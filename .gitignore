@@ -7,6 +7,7 @@ node_modules/
 # Ignore build directories
 tmp/
 build/
+bin/
 
 # Ignore environment variable files
 .env

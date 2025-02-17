@@ -1,0 +1,65 @@
+{{ define "resume/upload" }}
+<div id="resume-upload" class="fade-in block text-sm" {{ if .Swap }}hx-swap-oob="true"{{ end }}>
+
+    <label class="block mb-2 text-sm" for="resume_file">
+        <span class="text-gray-700 dark:text-gray-400">Resume file</span>
+    </label>
+    <input type="hidden" name="resume_file" value="{{ .FileUpload.FileName }}">
+
+    {{ if ne .FileUpload.FileName "" }}
+    <div class="mt-2 mb-2 flex flex-col md:flex-row gap-2 items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 p-4 mb-1">
+        <div class="grow-0 flex flex-wrap gap-4 md:w-9 items-center self-start">
+            <a href="/assets/uploads/{{ .FileUpload.FileName }}" title="Download" target="_blank" class="text-gray-400 dark:text-gray-600">
+                <i class="fa fa-up-right-from-square text-xl align-center"></i>
+            </a>
+            <a href="#" 
+                hx-confirm="Are you sure?"
+                hx-delete="/resume/upload/{{.FileUpload.FileName}}" 
+                hx-target="#resume-upload"
+                hx-push-url="false"
+                title="Remove" id="resume_file_remove" class="text-gray-400 dark:text-gray-600">
+                <i class="fa fa-trash-can text-xl align-center"></i>
+            </a>
+        </div>
+        <div class="grow w-full  lg:h-[16rem]">
+            {{ if pathext .FileUpload.FileName ".pdf" }}
+            <embed  src="/assets/uploads/{{ .FileUpload.FileName }}" type="application/pdf" width="100%" height="100%">
+            {{ else }}
+            <i class="fa fa-file-pdf text-2xl align-center"></i>
+            <span class="text-gray-500 dark:text-gray-500">{{ .FileUpload.FileName }}</span>
+            {{ end }}
+        </div>
+    </div>
+    {{ else }}
+    <label for="resume_file">
+    <div class="mt-2 mb-2 flex flex-col md:flex-row gap-2 items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 p-4 mb-1">
+        <div class="text-xl py-8 font-thin text-gray-500 dark:text-gray-500 cursor-pointer" onclick="document.getElementById('resume_file').click();">
+            <i class="fa fa-file-pdf"></i> Upload your resume
+        </div>
+    </div>
+    
+    <div class="relative flex  text-gray-500 focus-within:text-purple-600">
+        <input hx-preserve
+            type="file"
+            id="resume_file" 
+            name="upload" 
+            class="overflow-hidden block w-full rounded-0  text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+            aria-describedby="resume_file_help" 
+            hx-encoding="multipart/form-data"
+            hx-post="/resume/upload"
+            hx-push-url="false"
+            hx-trigger="change"
+            hx-target="#resume-upload"
+        >
+    </div>
+</label>
+    {{ with .Errors.Upload }} 
+    <p class="text-red-500 text-xs pt-1">{{ . }}</p>
+    {{ end }}
+    
+    <div class="my-1 text-xs text-end text-gray-500 dark:text-gray-300" id="resume_file_help">
+        Add the resume you applied with. *.pdf files only
+    </div>
+    {{ end }}
+</div>
+{{ end }}

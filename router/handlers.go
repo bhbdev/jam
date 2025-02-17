@@ -7,6 +7,7 @@ import (
 	"github.com/bhbdev/jam/router/controllers"
 	"github.com/bhbdev/jam/router/controllers/chat"
 	"github.com/bhbdev/jam/router/controllers/jobapp"
+	"github.com/bhbdev/jam/router/controllers/resume"
 	"github.com/bhbdev/jam/router/controllers/user"
 )
 
@@ -38,6 +39,10 @@ func Apply(ctx context.Context, mux Mux) {
 	mux.HandleFunc("GET /apps/edit/{id}", jobapp.JobAppForm)
 	mux.HandleFunc("POST /apps/edit/{id}", jobapp.JobAppForm)
 	mux.HandleFunc("DELETE /apps/delete/{id}", jobapp.JobAppDelete)
+
+	mux.HandleFunc("GET /resume/upload", resume.Upload)
+	mux.HandleFunc("POST /resume/upload", resume.Upload)
+	mux.HandleFunc("DELETE /resume/upload/{id}", resume.UploadDelete)
 
 	ws := chat.NewWebSocketHandler()
 	mux.HandleFunc("/ws", ws.HandleFunc)

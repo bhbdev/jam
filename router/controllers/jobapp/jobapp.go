@@ -9,6 +9,7 @@ import (
 	"github.com/bhbdev/jam/lib/page"
 	"github.com/bhbdev/jam/lib/pagination"
 	"github.com/bhbdev/jam/models"
+	"github.com/bhbdev/jam/router/controllers/resume"
 )
 
 const (
@@ -81,6 +82,9 @@ func JobAppForm(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 	p.Data["JobApp"] = jobapp
+	p.Data["FileUpload"] = &resume.FileUpload{
+		FileName: jobapp.ResumeFile,
+	}
 
 	if r.Method == http.MethodGet {
 		p.Render(w, tpl)
@@ -99,17 +103,17 @@ func JobAppForm(w http.ResponseWriter, r *http.Request) {
 		p.AddError("date_applied", "Invalid date format")
 	}
 	jobapp.DateApplied = dateApplied
-
+	jobapp.ResumeFile = r.PostFormValue("resume_file")
 	//todo: handle file upload better.. through context? middleware?
-	file, _, _ := r.FormFile("resume_file")
-	if file != nil {
-		err = handleResumeUpload(p, r)
-		if err != nil {
-			p.Render(w, tpl)
-			return
-		}
-		jobapp.ResumeFile = p.Data["FileUpload"].(*FileUpload).FileName
-	}
+	// file, _, _ := r.FormFile("resume_file")
+	// if file != nil {
+	// 	err = handleResumeUpload(p, r)
+	// 	if err != nil {
+	// 		p.Render(w, tpl)
+	// 		return
+	// 	}
+	// 	jobapp.ResumeFile = p.Data["FileUpload"].(*FileUpload).FileName
+	// }
 
 	// validate
 	for key, err := range jobapp.Validate() {
