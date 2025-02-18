@@ -155,7 +155,7 @@ func (h *WebSocketHandler) ApplyWebSocketHandlers() {
 		// assistant chat request
 		stream := false
 		botChatRequest := &api.ChatRequest{
-			Model:    "deepseek-r1:1.5b",
+			Model:    "wizardlm2:7b",
 			Messages: History,
 			Stream:   &stream,
 		}

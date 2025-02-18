@@ -1852,6 +1852,9 @@
   .w-full {
     width: 100%;
   }
+  .w-lg {
+    width: var(--container-lg);
+  }
   .max-w-2xl {
     max-width: var(--container-2xl);
   }
@@ -1922,6 +1925,12 @@
     .datatable-wrapper & .datatable-input:focus {
       border-color: var(--color-blue-600);
     }
+  }
+  .min-w-lg {
+    min-width: var(--container-lg);
+  }
+  .min-w-md {
+    min-width: var(--container-md);
   }
   .flex-1 {
     flex: 1;
@@ -2583,6 +2592,9 @@
   }
   .bg-gray-300 {
     background-color: var(--color-gray-300);
+  }
+  .bg-gray-500 {
+    background-color: var(--color-gray-500);
   }
   .bg-gray-900\/50 {
     background-color: color-mix(in oklab, var(--color-gray-900) 50%, transparent);
@@ -3650,6 +3662,11 @@
   .dark\:bg-blue-600 {
     &:where(.dark, .dark *) {
       background-color: var(--color-blue-600);
+    }
+  }
+  .dark\:bg-gray-300 {
+    &:where(.dark, .dark *) {
+      background-color: var(--color-gray-300);
     }
   }
   .dark\:bg-gray-600 {

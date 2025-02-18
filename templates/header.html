@@ -66,6 +66,19 @@
             </template>
           </button>
         </li>
+        <!-- Chat icon -->
+        <li>
+          <button
+            class="rounded-md focus:outline-none focus:shadow-outline-cyan"
+            hx-get="/chat"
+            hx-select="#ws-chat"
+            hx-target="#ws-chat"
+            hx-swap="outerHTML"
+            hx-push-url="false"
+            aria-label="Open chat panel"
+          >
+          <i class="fa fa-message"></i>
+          </button>
         <!-- Notifications menu -->
         <li class="relative">
           <button
