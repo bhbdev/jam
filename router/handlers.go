@@ -25,7 +25,7 @@ func Apply(ctx context.Context, mux Mux) {
 
 	mux.HandleFunc("GET /login", user.Login)
 	mux.HandleFunc("POST /login", user.Login)
-	//mux.HandleFunc("GET /logout", user.Logout)
+	mux.HandleFunc("GET /logout", user.Logout)
 
 	mux.HandleFunc("GET /admin/user/list", user.UserList)
 	mux.HandleFunc("GET /admin/user/add", user.UserForm)
@@ -46,7 +46,7 @@ func Apply(ctx context.Context, mux Mux) {
 
 	ws := chat.NewWebSocketHandler()
 	mux.HandleFunc("/ws", ws.HandleFunc)
-	mux.HandleFunc("/chat", controllers.Chat)
+	mux.HandleFunc("/chat", chat.Chat)
 }
 
 func Assets(mux Mux, path string) {

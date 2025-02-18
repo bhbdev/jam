@@ -3,9 +3,9 @@ package user
 import (
 	"net/http"
 
+	"github.com/bhbdev/jam/config"
 	"github.com/bhbdev/jam/lib/page"
 	"github.com/bhbdev/jam/models"
-	"github.com/bhbdev/jam/services"
 )
 
 func Login(w http.ResponseWriter, r *http.Request) {
@@ -22,14 +22,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userService := services.NewUserService(p.Database().Instance())
 	var user models.User
 
 	// handle POST
 	user.Email = r.PostFormValue("email")
 	user.Password = r.PostFormValue("password")
 
-	errs := userService.Login(r.Context(), &user)
+	sessionId, errs := p.Services.UserService.Login(w, r, &user)
 	// validate
 	for key, err := range errs {
 		p.AddError(key, err)
@@ -39,6 +38,27 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		p.Render(w, tpl)
 		return
 	}
+
+	cookie := &http.Cookie{
+		Name:  config.SessionCookieName,
+		Value: sessionId,
+		Path:  "/",
+	}
+	http.SetCookie(w, cookie)
 	w.Header().Set("HX-Redirect", "/apps")
 	//http.Redirect(w, r, "/apps", http.StatusSeeOther)
+}
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	p := page.New(r.Context())
+	p.Services.UserService.Logout(w, r)
+
+	cookie := &http.Cookie{
+		Name:   config.SessionCookieName,
+		Value:  "",
+		MaxAge: -1,
+	}
+	http.SetCookie(w, cookie)
+	//w.Header().Set("HX-Redirect", "/login")
+	http.Redirect(w, r, "/login", http.StatusSeeOther)
 }

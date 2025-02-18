@@ -22,6 +22,12 @@
     --font-mono: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace';
 }
 
+@layer base {
+    body {
+        @apply bg-gray-50 dark:bg-gray-900 text-gray-950 dark:text-gray-100;
+    }
+}
+
 @layer components {
     .badge {
         @apply px-2 py-1 font-semibold leading-tight rounded-full;
@@ -70,7 +76,7 @@ table {
     @apply bg-gray-50 dark:bg-gray-800;
 }
 thead {
-    @apply z-10 sticky top-0 bg-gray-50 dark:bg-gray-800;
+    @apply  bg-gray-50 dark:bg-gray-800;
 }
 input[type="text"], 
 input[type="email"],

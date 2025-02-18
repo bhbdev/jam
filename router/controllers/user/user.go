@@ -8,7 +8,6 @@ import (
 	"github.com/bhbdev/jam/lib/page"
 	"github.com/bhbdev/jam/lib/pagination"
 	"github.com/bhbdev/jam/models"
-	"github.com/bhbdev/jam/services"
 )
 
 // const (
@@ -23,9 +22,7 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 		Pagination: pagination.NewPagination(r),
 	}
 
-	db := p.Database()
-	s := services.NewUserService(db.Instance())
-	users, err := s.List(r.Context(), params)
+	users, err := p.Services.UserService.List(r.Context(), params)
 	if err != nil {
 		logger.Error("UserList error", "error", err)
 	}
@@ -47,7 +44,6 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 	p.Data["FormAction"] = r.URL.Path
 	p.Data["IsEditing"] = isEditing
 
-	s := services.NewUserService(p.Database().Instance())
 	var user *models.User
 
 	if isEditing {
@@ -58,7 +54,7 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		user, err = s.Get(r.Context(), id)
+		user, err = p.Services.UserService.Get(r.Context(), id)
 		if err != nil {
 			logger.Error("user does not exist", "id", id)
 			http.Redirect(w, r, "/admin/user", http.StatusSeeOther)
@@ -77,20 +73,12 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 	user.LastName = r.PostFormValue("lastName")
 	user.Email = r.PostFormValue("email")
 	user.Status = models.UserStatus(r.PostFormValue("status"))
+	user.ProfileImage = r.PostFormValue("profileImage")
 
 	oldPassword := user.Password
 	if newPassword := r.PostFormValue("password"); newPassword != "" {
 		user.Password = newPassword
 	}
-
-	//todo: handle file upload better.. through context? middleware?
-	// 	file, err := p.fs.GetUpload("profile_image", r)
-	// 	if err != nil {
-	// 		p.Render(w, tpl)
-	// 		return
-	// 	}
-	// 	user.ProfileImage = p.Data["FileUpload"].(*FileUpload).FileName
-	// }
 
 	// validate
 	for key, err := range user.Validate() {
@@ -102,7 +90,7 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := s.Save(r.Context(), user)
+	err := p.Services.UserService.Save(r.Context(), user)
 	if err != nil {
 		logger.Error("JobAppForm error saving jobapp", "error", err)
 		p.AddError("alert", "Error saving job application")
@@ -111,7 +99,7 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if oldPassword != user.Password {
-		err := s.SetPassword(r.Context(), user.ID, user.Password)
+		err := p.Services.UserService.SetPassword(r.Context(), user.ID, user.Password)
 		if err != nil {
 			logger.Error("failed to update password", "error", err)
 			p.AddError("Database", err.Error())

@@ -2,10 +2,15 @@ package services
 
 import (
 	"context"
+	"net/http"
 	"time"
 
+	"github.com/bhbdev/jam/config"
 	"github.com/bhbdev/jam/lib/logger"
 	"github.com/bhbdev/jam/lib/password"
+	"github.com/bhbdev/jam/lib/redis"
+	"github.com/bhbdev/jam/lib/session"
+	"github.com/google/uuid"
 
 	//"bhbdev/lib/util"
 	"github.com/bhbdev/jam/models"
@@ -132,7 +137,8 @@ func (s *UserService) Register(ctx context.Context, user *models.User) (errs map
 	return
 }
 
-func (s *UserService) Login(ctx context.Context, user *models.User) (errs map[string]string) {
+func (s *UserService) Login(w http.ResponseWriter, r *http.Request, user *models.User) (sessionId string, errs map[string]string) {
+	ctx := r.Context()
 	errs = make(map[string]string)
 
 	// find user with username and password match
@@ -153,8 +159,27 @@ func (s *UserService) Login(ctx context.Context, user *models.User) (errs map[st
 		return
 	}
 
-	// update last login time
+	sh := session.NewSessionHandler(redis.Client)
+
+	uuid, err := uuid.NewRandom()
+	if err != nil {
+		logger.Error("UserService.Login error generating session key", "error", err)
+		errs["Session"] = "Login failed"
+		return
+	}
+	sessionId = uuid.String()
+	// create a session
+
+	err = sh.Create(ctx, sessionId, session.UserSession{Id: int(u.ID)}, config.SessionExpireTime)
+	if err != nil {
+		logger.Error("UserService.Login error creating session", "error", err)
+		errs["Session"] = "Login failed"
+		return
+	}
+
+	// Ping the user's last login time.
 	u.LastLoginAt = time.Now()
+
 	err = s.Save(ctx, u)
 	if err != nil {
 		logger.Error("UserService.Login error saving record", "error", err)
@@ -162,4 +187,23 @@ func (s *UserService) Login(ctx context.Context, user *models.User) (errs map[st
 	}
 
 	return
+}
+
+func (s *UserService) Logout(w http.ResponseWriter, r *http.Request) {
+	ctx := r.Context()
+	sh := session.NewSessionHandler(redis.Client)
+
+	// get the session id from the cookie
+	sessionId, err := r.Cookie(config.SessionCookieName)
+	if err != nil {
+		logger.Error("UserService.Logout error getting session id", "error", err)
+		return
+	}
+
+	// expire the session
+	err = sh.Expire(ctx, sessionId.Value, 0)
+	if err != nil {
+		logger.Error("UserService.Logout error expiring session", "error", err)
+		return
+	}
 }

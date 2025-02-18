@@ -11,3 +11,8 @@ database:
 #  name: "jam"
 #  user: "pguser"
 #  password: "pgpass"
+redis:
+  host: "localhost"
+  port: 6379
+  db: 0
+  password: ""

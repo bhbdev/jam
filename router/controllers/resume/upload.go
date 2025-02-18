@@ -32,7 +32,6 @@ func UploadDelete(w http.ResponseWriter, r *http.Request) {
 	}
 	p.Data["Swap"] = true
 	p.Data["FileUpload"] = &FileUpload{}
-	//w.Header().Set("HX-Redirect", "/apps/new")
 	p.Render(w, "resume/upload")
 	return
 }

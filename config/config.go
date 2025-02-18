@@ -11,6 +11,7 @@ import (
 type Config struct {
 	Server      Server
 	Database    Database
+	Redis       Redis
 	Development bool
 }
 
@@ -23,6 +24,11 @@ func DefaultConfig() *Config {
 		Database: Database{
 			Engine: "sqlite3",
 			Name:   "jam.db",
+		},
+		Redis: Redis{
+			Host: "localhost",
+			Port: 6379,
+			Db:   0,
 		},
 		Development: true,
 	}
@@ -46,6 +52,10 @@ func Load() (*Config, error) {
 	viper.BindEnv("Database.Pass", "DB_PASS")
 	viper.BindEnv("Database.Host", "DB_HOST")
 	viper.BindEnv("Database.Port", "DB_PORT")
+	viper.BindEnv("Database.SslMode", "DB_SSLMODE")
+	viper.BindEnv("Redis.Host", "REDIS_HOST")
+	viper.BindEnv("Redis.Port", "REDIS_PORT")
+	viper.BindEnv("Redis.Db", "REDIS_DB")
 	viper.BindEnv("Development", "DEVELOPMENT")
 
 	if err := viper.ReadInConfig(); err != nil {
@@ -75,6 +85,17 @@ type Server struct {
 
 func (s Server) Address() string {
 	return fmt.Sprintf("%s:%d", s.Host, s.Port)
+}
+
+type Redis struct {
+	Host string
+	Port int
+	Pass string
+	Db   int
+}
+
+func (r Redis) Address() string {
+	return fmt.Sprintf("%s:%d", r.Host, r.Port)
 }
 
 type Database struct {

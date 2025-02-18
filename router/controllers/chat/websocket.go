@@ -73,11 +73,16 @@ func (h *WebSocketHandler) ApplyWebSocketHandlers() {
 
 		stream := false
 		greetChatRequest := &api.ChatRequest{
-			Model: "deepseek-r1:1.5b",
+			//Model: "deepseek-r1:1.5b",
+			Model: "wizardlm2:7b",
 			Messages: []api.Message{
 				{
-					Role:    "user",
-					Content: "Hello. You are a friendly assistant.",
+					Role:    "system",
+					Content: "You are Jambot, a friendly assistant. Always keep your answers short and sweet.",
+				},
+				{
+					Role:    "assistant",
+					Content: "How can I help you today?",
 				},
 			},
 			Stream: &stream,

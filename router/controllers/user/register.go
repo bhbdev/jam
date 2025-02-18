@@ -5,7 +5,6 @@ import (
 
 	"github.com/bhbdev/jam/lib/page"
 	"github.com/bhbdev/jam/models"
-	"github.com/bhbdev/jam/services"
 )
 
 func Register(w http.ResponseWriter, r *http.Request) {
@@ -21,14 +20,13 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	userService := services.NewUserService(p.Database().Instance())
 	var user models.User
 
 	// handle POST
 	user.Username = r.PostFormValue("username")
 	user.Email = r.PostFormValue("email")
 
-	errs := userService.Register(r.Context(), &user)
+	errs := p.Services.UserService.Register(r.Context(), &user)
 	// validate
 	for key, err := range errs {
 		p.AddError(key, err)
