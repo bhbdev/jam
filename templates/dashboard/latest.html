@@ -1,0 +1,37 @@
+{{ define "dashboard/latest" }}
+
+{{ if gt (len .LatestApps) 0 }}
+<div class="w-full p-4 sm:p-8 bg-white border border-gray-200 rounded-lg shadow-sm  dark:bg-gray-800 dark:border-gray-700">
+    <div class="flex items-center justify-between mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Latest Applications</h5>
+        <a href="/apps" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+            View all
+        </a>
+   </div>
+   <div class="flow-root">
+        <ul role="list" class="divide-y divide-gray-200 dark:divide-gray-700">
+            {{ range .LatestApps }}
+            <li class="py-3 sm:py-4">
+                <div class="flex items-center flex-wrap">
+                    <div class="flex-1 min-w-0 me-4">
+                        <p class="text-sm font-medium text-gray-900  dark:text-white">
+                            {{ .Position }}
+                        </p>
+                        <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                            {{ .Company }}
+                        </p>
+                    </div>
+                    <div class="inline-flex items-center text-sm font-semibold text-gray-900 dark:text-white">
+                        <span class="badge badge-default">
+                            {{ .Status }}
+                        </span>
+                    </div>
+                </div>
+            </li>
+            {{ end }}
+        </ul>
+   </div>
+</div>
+{{ end }}
+
+{{ end }}

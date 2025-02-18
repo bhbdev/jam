@@ -3,7 +3,7 @@
     hx-ext="ws" 
     ws-connect="/ws" 
     hx-on:htmx:ws-after-message="c=document.getElementById('chat'); if (c) c.scrollTo({ top: c.scrollHeight, behavior: 'smooth' });"
-    class="flex flex-col flex-shrink w-lg h-full"
+    class="flex flex-col flex-shrink max-w-lg flex-1"
     
     >
 	<div class="messages flex flex-col flex-grow  w-full bg-white shadow-xl rounded-lg overflow-hidden p-4">

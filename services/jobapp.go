@@ -50,6 +50,63 @@ func (s *JobAppService) List(ctx context.Context, params *models.ListParams) ([]
 	return apps, nil
 }
 
+func (s *JobAppService) StatusTotals(ctx context.Context) (*models.StatusTotals, error) {
+
+	type Totals struct {
+		Total  int
+		Status string
+	}
+	var totals []Totals
+
+	err := s.JobApp.WithContext(ctx).
+		Select(
+			s.JobApp.ID.Count().As("total"),
+			s.JobApp.Status.As("status"),
+		).
+		Group(s.JobApp.Status).
+		Scan(&totals)
+	if err != nil {
+		logger.Error("JobAppService.StatusTotals error", "error", err)
+		return nil, err
+	}
+	// would rather do this in the query with case/when expressions, but not sure how with gorm :\
+	var statusTotals models.StatusTotals
+	for _, t := range totals {
+		switch t.Status {
+		case "applied":
+			statusTotals.Applied = t.Total
+		case "interview":
+			statusTotals.Interviews = t.Total
+		case "offer":
+			statusTotals.Offers = t.Total
+		case "rejected":
+			statusTotals.Rejected = t.Total
+		}
+	}
+
+	total, err := s.JobApp.WithContext(ctx).Count()
+	if err != nil {
+		logger.Error("JobAppService.StatusTotals error counting records", "error", err)
+		return nil, err
+	}
+	statusTotals.Total = int(total)
+	logger.Info("JobAppService.StatusTotals!!!!!!!!!!!", "totals", totals)
+
+	return &statusTotals, nil
+}
+
+func (s *JobAppService) GetLatest(ctx context.Context, limit int) ([]*models.JobApp, error) {
+	apps, err := s.JobApp.WithContext(ctx).
+		Order(s.JobApp.CreatedAt.Desc(), s.JobApp.ID.Desc()).
+		Limit(limit).
+		Find()
+	if err != nil {
+		logger.Error("JobAppService.GetLatest error", "error", err)
+		return nil, err
+	}
+	return apps, nil
+}
+
 func (s *JobAppService) Get(ctx context.Context, id int) (*models.JobApp, error) {
 	//app, err := s.JobApp.WithContext(ctx).Where(s.JobApp.ID.Eq(id)).First()
 	app, err := s.JobApp.WithContext(ctx).GetByID(id)

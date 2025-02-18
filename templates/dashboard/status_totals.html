@@ -1,0 +1,66 @@
+{{ define "dashboard/status_totals" }}
+
+{{ with .StatusTotals }}
+
+<p>You have <strong>{{ .Total }}</strong> total job applications</p>
+<div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="mr-4 flex p-3 w-12 h-12 items-center justify-center text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+      <i class="fa fa-file-lines"></i>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        Applied
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+        {{ .Applied }}
+      </p>
+    </div>
+  </div>
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="mr-4 flex p-3 w-12 h-12 items-center justify-center text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
+      <i class="fa fa-user"></i>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        Interviews
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+        {{ .Interviews }}
+      </p>
+    </div>
+  </div>
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="mr-4 flex p-3 w-12 h-12 items-center justify-center text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+        <i class="fa fa-hand-holding-dollar"></i>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        Offers
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+        {{ .Offers }}
+      </p>
+    </div>
+  </div>
+  <!-- Card -->
+  <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+    <div class="mr-4 flex p-3 w-12 h-12 items-center justify-center text-rose-500 bg-rose-100 rounded-full dark:text-rose-100 dark:bg-rose-500">
+        <i class="fa fa-thumbs-down"></i>
+    </div>
+    <div>
+      <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+        Rejected
+      </p>
+      <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+        {{ .Rejected }}
+      </p>
+    </div>
+  </div>
+</div>
+{{ end }}
+
+{{ end}}

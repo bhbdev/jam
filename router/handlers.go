@@ -40,6 +40,7 @@ func Apply(ctx context.Context, mux Mux) {
 	mux.HandleFunc("POST /apps/edit/{id}", jobapp.JobAppForm)
 	mux.HandleFunc("DELETE /apps/delete/{id}", jobapp.JobAppDelete)
 
+	mux.HandleFunc("GET /resumes", resume.ResumeList)
 	mux.HandleFunc("GET /resume/upload", resume.Upload)
 	mux.HandleFunc("POST /resume/upload", resume.Upload)
 	mux.HandleFunc("DELETE /resume/upload/{id}", resume.UploadDelete)

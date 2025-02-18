@@ -13,3 +13,11 @@ var MODELS = []interface{}{
 type ListParams struct {
 	Pagination *pagination.Pagination
 }
+
+type StatusTotals struct {
+	Total      int
+	Applied    int
+	Interviews int
+	Offers     int
+	Rejected   int
+}

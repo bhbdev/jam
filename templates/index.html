@@ -1,20 +1,38 @@
 {{ define "index" }}
 
-	<div class="container flex flex-col flex-grow w-full overflow-hidden p-4">
+<div class="container p-6 lg:px-12 mx-auto grid">
 		
-        <div class="flex w-full mt-2 space-x-3 max-w-4xl me-auto justify-start">
-            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
-                <img src="https://api.dicebear.com/7.x/adventurer-neutral/svg?seed=Buddy" />
-              </div>
-            <div class="flex flex-col gap-1 items-end">
-              <div class="bg-blue-600 text-white p-3 rounded-r-lg rounded-tl-lg">
+        <div class="flex w-full gap-3 max-w-4xl justify-start mb-4">
+            <div class="flex-shrink-0 h-10 w-10 rounded-full bg-violet-300">    
+                <img class="w-12 h-10 mr-2" src="/assets/img/jam.png" alt="logo">
+            </div>
+            <div class="flex flex-col gap-1 pt-0.5 items-end">
+              <div class="bg-indigo-700 text-white p-3 rounded-r-lg rounded-bl-lg">
                 <div class="text-sm">
-                    Hey, whats up!
+                    Hey friend, how are you?  Let's get jammin' 🔊
                 </div>
               </div>
             </div>
+        </div>
+
+        <h4 class="mt-4 text-lg font-semibold text-gray-600 dark:text-gray-300">
+            Dashboard
+        </h4>
+        
+        <div class="flex-1 flex flex-col gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"> 
+
+            {{ template "dashboard/status_totals" . }}
             
-          </div>
+        </div>
+
+        <div class="grid gap-6 mb-8 lg:grid-cols-2  gap-4 mt-4 xbg-amber-400">
+
+            {{ template "dashboard/charts" . }}
+
+            {{ template "dashboard/latest" . }}
+
+        </div>
+
 	</div>
 	
 
