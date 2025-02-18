@@ -40,13 +40,12 @@ godocs:
 	@echo "open http://localhost:6060/pkg/bhbdev/jam/"
 	godoc -http=:6060
 
+postcss:
+	npx postcss ./assets/css/styles.css -o ./assets/css/styles.css --use autoprefixer --use cssnano
+
 buildcss:
 	npx @tailwindcss/cli -i ./app/styles.css -o ./assets/css/styles.css
 watchcss:
 	npx @tailwindcss/cli -i ./app/styles.css -o ./assets/css/styles.css --watch
 
-postcss:
-	postcss ./assets/css/styles.css -o ./assets/css/styles.css --use autoprefixer --use cssnano
-
-
-.PHONY: build build-all-subpackages install run generate-db goimports vet lint tidy migrate godocs buildcss watchcss postcss
+.PHONY: build build-all-subpackages install run generate-db goimports vet lint tidy migrate godocs
