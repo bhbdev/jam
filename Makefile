@@ -45,4 +45,8 @@ buildcss:
 watchcss:
 	npx @tailwindcss/cli -i ./app/styles.css -o ./assets/css/styles.css --watch
 
-.PHONY: build build-all-subpackages install run generate-db goimports vet lint tidy migrate godocs
+postcss:
+	postcss ./assets/css/styles.css -o ./assets/css/styles.css --use autoprefixer --use cssnano
+
+
+.PHONY: build build-all-subpackages install run generate-db goimports vet lint tidy migrate godocs buildcss watchcss postcss

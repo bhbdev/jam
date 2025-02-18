@@ -21,7 +21,7 @@
   "license": "MIT",
   "author": "Beau Bishop",
   "scripts": {
-    "buildcss": "tailwindcss -i ./app/styles.css -o ./assets/css/styles.css",
+    "buildcss": "tailwindcss -i ./app/styles.css -o ./assets/css/styles.css && postcss ./assets/css/styles.css -o ./assets/css/styles.css --use autoprefixer --use cssnano",
     "watchcss": "npx tailwindcss -i ./app/styles.css -o ./assets/css/styles.css --watch"
   },
   "devDependencies": {
