@@ -34,18 +34,17 @@ tidy:
 migrate:
 	go run ./cmd/jam migrate
 
-
 # launches the godoc server on port 6060
 godocs:
-	@echo "open http://localhost:6060/pkg/bhbdev/jam/"
+	@echo "open http://localhost:6060/pkg/github.com/bhbdev/jam"
 	godoc -http=:6060
 
 postcss:
 	npx postcss ./assets/css/styles.css -o ./assets/css/styles.css --use autoprefixer --use cssnano
 
 buildcss:
-	npx @tailwindcss/cli -i ./app/styles.css -o ./assets/css/styles.css
+	npx @tailwindcss/cli -i ./web/css/styles.css -o ./assets/css/styles.css
 watchcss:
-	npx @tailwindcss/cli -i ./app/styles.css -o ./assets/css/styles.css --watch
+	npx @tailwindcss/cli -i ./web/css/styles.css -o ./assets/css/styles.css --watch
 
 .PHONY: build build-all-subpackages install run generate-db goimports vet lint tidy migrate godocs
