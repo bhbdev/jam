@@ -1,14 +1,8 @@
 
+<img src="assets/img/jam.png" alt="JAM" style="float:left;width:75px;margin-right:1rem;background:#222;border-radius:50%;overflow:visible"> 
 <h1>
-<table width="100%" style="width:100%; border-collapse:collapse" cellspacing="0" cellpadding="0">
-<tr>
-<td>
- <img src="assets/img/jam.png" alt="JAM" style="float:left;width:75px;margin-right:1rem;background:#222;border-radius:50%;overflow:visible"> 
- </td>
- <td>
-    <div>
     <span style="font-weight:900;text-shadow:-1px 2px #f000f0">JAM </span>
-    <div style="font:normal 1rem sans-serif;align-self:bottom;">Job Application Management</div>
+    <div><small>Job Application Management</small></div>
     </div>
     </td>
     </tr></table>
