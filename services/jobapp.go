@@ -6,7 +6,7 @@ import (
 	"github.com/bhbdev/jam/lib/logger"
 	//"github.com/bhbdev/lib/util"
 	"github.com/bhbdev/jam/models"
-	"github.com/bhbdev/jam/services/repo"
+	"github.com/bhbdev/jam/models/repo"
 
 	"gorm.io/gorm"
 )

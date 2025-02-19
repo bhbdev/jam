@@ -15,7 +15,6 @@ import (
 	"github.com/bhbdev/jam/lib/session"
 	"github.com/bhbdev/jam/router"
 	"github.com/bhbdev/jam/services"
-	//"bhbdev/jam/migrations"
 )
 
 func ServerApp(cfg *config.Config) {
@@ -28,14 +27,13 @@ func ServerApp(cfg *config.Config) {
 		os.Exit(1)
 	}
 
-	err = redis.Setup(cfg.Redis.Address())
+	redisClient, err := redis.Setup(&cfg.Redis)
 	if err != nil {
-		logger.Error("failed to connect to redis", "error", err)
-		os.Exit(1)
+		logger.Fatal("failed to connect to redis", "error", err)
 	}
-	session := session.NewSessionHandler(redis.Client)
+	session := session.NewSessionHandler(redisClient.Client)
 
-	userService := services.NewUserService(db.Instance())
+	userService := services.NewUserService(db.Instance(), session)
 	jobAppService := services.NewJobAppService(db.Instance())
 	services := services.NewServices(userService, jobAppService)
 

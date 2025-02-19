@@ -12,7 +12,7 @@ var g_ *gen.Generator
 func g() *gen.Generator {
 	if g_ == nil {
 		cfg := gen.Config{
-			OutPath:       "services/repo",
+			OutPath:       "./models/repo",
 			ModelPkgPath:  "./models",
 			FieldNullable: true,
 		}

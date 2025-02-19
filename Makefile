@@ -13,7 +13,7 @@ run:
 	go run ./cmd/jam run
 
 generate-db:
-	go run ./tools/dbgen
+	go run ./models/tools/dbgen
 
 # Run goimports against code
 goimports:
