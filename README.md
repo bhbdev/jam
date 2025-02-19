@@ -1,6 +1,6 @@
 
 <h1 style="display:flex;width:100%;align-items:center">
- <img src="assets/img/jam.png" alt="JAM" style="width:75px;margin-right:1rem;background:#222;border-radius:50%;overflow:visible"> 
+ <img src="assets/img/jam.png" alt="JAM" style="float:left;width:75px;margin-right:1rem;background:#222;border-radius:50%;overflow:visible"> 
     <div>
     <span style="font-weight:900;text-shadow:-1px 2px #f000f0">JAM </span>
     <div style="font:normal 1rem sans-serif;align-self:bottom;">Job Application Management</div>
