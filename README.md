@@ -1,10 +1,9 @@
-
-
-<h1 style="display:inline-flex">
-    <img src="assets/img/jam.png" alt="JAM" style="float:left;width:75px;margin-right:1rem;background:#222;border-radius:50%;overflow:visible"> 
-    <div style="font-weight:900;text-shadow:-1px 2px #f000f0">JAM </div>
-    <div><small>Job Application Management</small></div>
+<h1 style="font-weight:900;text-shadow:-1px 2px #f000f0">
+    <img src="assets/img/jam.png" alt="JAM" style="float:left;width:75px;margin-right:1rem;background:#222;border-radius:50%;overflow:visible"> JAM
+    - Job Application Management
 </h1>
+
+
 
 <br style="clear:both">
 
