@@ -2,10 +2,10 @@ package session
 
 import (
 	"context"
+	"errors"
 	"strconv"
 	"time"
 
-	"github.com/bhbdev/jam/lib/logger"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -32,7 +32,10 @@ func (s *Session) Get(ctx context.Context, sessionId string) (UserSession, error
 	if err != nil {
 		return UserSession{}, err
 	}
-	logger.Info("session data", "data", rs)
+	if len(rs) == 0 {
+		return UserSession{}, errors.New("invalid-session")
+	}
+
 	userId, err := strconv.Atoi(rs["id"])
 	if err != nil {
 		return UserSession{}, err
