@@ -45,7 +45,7 @@ func ServerApp(cfg *config.Config) {
 	router.Assets(app, "assets")
 
 	// add middleware
-	app.AddMiddleware(middleware.NewTemplate("templates"))
+	app.AddMiddleware(middleware.NewTemplate("web/templates"))
 	app.AddMiddleware(middleware.NewUserSessionHandler(session, userService))
 	app.AddMiddleware(middleware.NewContentType())
 	app.AddMiddleware(middleware.NewDatabase(db))
