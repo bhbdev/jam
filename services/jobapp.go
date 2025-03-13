@@ -90,7 +90,7 @@ func (s *JobAppService) StatusTotals(ctx context.Context) (*models.StatusTotals,
 		return nil, err
 	}
 	statusTotals.Total = int(total)
-	logger.Info("JobAppService.StatusTotals!!!!!!!!!!!", "totals", totals)
+	//logger.Info("JobAppService.StatusTotals!!!!!!!!!!!", "totals", totals)
 
 	return &statusTotals, nil
 }

@@ -1,6 +1,6 @@
 {{ define "index" }}
 
-<div class="container p-6 lg:px-12 mx-auto grid">
+    <div class="container p-6 lg:px-12 mx-auto grid">
 		
         <div class="flex w-full gap-3 max-w-4xl justify-start mb-4">
             <div class="flex-shrink-0 h-10 w-10 rounded-full bg-violet-300">    
@@ -20,17 +20,12 @@
         </h4>
         
         <div class="flex-1 flex flex-col gap-4 mt-4 pt-4 border-t border-gray-200 dark:border-gray-700"> 
-
             {{ template "dashboard/status_totals" . }}
-            
         </div>
 
-        <div class="grid gap-6 mb-8 lg:grid-cols-2  gap-4 mt-4 xbg-amber-400">
-
+        <div class="grid gap-6 mb-8 lg:grid-cols-2  gap-4 mt-4">
             {{ template "dashboard/charts" . }}
-
             {{ template "dashboard/latest" . }}
-
         </div>
 
 	</div>

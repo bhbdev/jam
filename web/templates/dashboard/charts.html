@@ -1,5 +1,46 @@
 {{ define "dashboard/charts" }}
-    <div class="w-full  p-4 sm:p-8 bg-white border border-gray-200 rounded-lg shadow-sm  dark:bg-gray-800 dark:border-gray-700">
-        Coming soon: charts!
+    <div class="min-w-0 p-4 sm:p-8 bg-white border border-gray-200 rounded-lg shadow-sm  dark:bg-gray-800 dark:border-gray-700">
+        Charts!
+        <canvas id="pie"></canvas>
+        <canvas id="line"></canvas>
+        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            <!-- Chart legend -->
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-blue-600 rounded-full"></span>
+                <span>Applied</span>
+            </div>
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-amber-500 rounded-full"></span>
+                <span>Interviews</span>
+            </div>
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+                <span>Offers</span>
+            </div>
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-rose-600 rounded-full"></span>
+                <span>Rejected</span>
+            </div>
+        </div>
     </div>
+    {{ with .StatusTotals}}
+    <script defer>
+        document.body.addEventListener('htmx:load', function(event) {
+            NewPieChart(
+                'pie', 
+                [`{{.Applied}}`, `{{.Interviews}}`, `{{.Offers}}`, `{{.Rejected}}`], 
+                ['Applied','Interviews','Offers','Rejected'], 
+                ['#3b82f6', '#dd6b20', '#10b981', '#ff2056']
+            );
+            NewLineChart(
+                'line', 
+                [`{{.Applied}}`, `{{.Interviews}}`, `{{.Offers}}`, `{{.Rejected}}`], 
+                ['Applied','Interviews','Offers','Rejected'], 
+                ['#3b82f6', '#dd6b20', '#10b981', '#ff2056']
+            );
+        });
+    </script>
+    {{ end }}
+    
 {{ end }}
+

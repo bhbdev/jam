@@ -104,3 +104,28 @@ input[type="radio"] {
 
 
 
+.fs-wrap {
+    position: relative;
+    display: grid;
+    
+}
+
+.fs-wrap::after {
+    display: block;
+    content: attr(data-value) " ";
+    white-space: pre-wrap;
+    visibility: hidden;
+}
+
+.fs-wrap textarea {
+    resize: none;
+    overflow: hidden;
+}
+
+.fs-wrap::after,
+.fs-wrap textarea {
+    font:inherit;
+    grid-area: 1/1/2/2;
+    padding:10px;
+}
+

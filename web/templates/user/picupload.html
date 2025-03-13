@@ -1,0 +1,60 @@
+{{ define "user/picupload" }}
+<div id="pic-upload" class="fade-in block text-sm" {{ if .Swap }}hx-swap-oob="true"{{ end }}>
+
+    <label class="block mb-2 text-sm" for="profile_pic"></label>
+        <span class="text-gray-700 dark:text-gray-400">Profile Pic</span>
+    </label>
+    <input type="hidden" name="profile_pic" value="{{ .FileUpload.FileName }}">
+
+    {{ if ne .User.ProfileImage "" }}
+    <div class="mt-2 mb-2 flex flex-col md:flex-row gap-2 items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 p-4 mb-1">
+        <div class="grow-0 flex flex-wrap gap-4 md:w-9 items-center self-start">
+            <a href="/assets/uploads/{{ .User.ProfileImage }}" title="Download" target="_blank" class="text-gray-400 dark:text-gray-600">
+                <i class="fa fa-up-right-from-square text-xl align-center"></i>
+            </a>
+            <a href="#" 
+                hx-confirm="Are you sure?"
+                hx-delete="/profile/upload/{{.User.ProfileImage}}" 
+                hx-target="#pic-upload"
+                hx-push-url="false"
+                title="Remove" id="profile_pic_remove" class="text-gray-400 dark:text-gray-600"></a>
+                <i class="fa fa-trash-can text-xl align-center"></i>
+            </a>
+        </div>
+        <div class="grow w-full lg:h-[16rem]"></div>
+            <img src="/assets/uploads/{{ .User.ProfileImage }}" alt="Profile Pic" class="w-full h-full object-cover rounded-lg">
+        </div>
+    </div>
+    {{ else }}
+    <label for="profile_pic"></label>
+    <div class="mt-2 mb-2 flex flex-col md:flex-row gap-2 items-center justify-center bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-100 dark:border-gray-700 p-4 mb-1">
+        <div class="text-xl py-8 font-thin text-gray-500 dark:text-gray-500 cursor-pointer" onclick="document.getElementById('profile_pic').click();">
+            <i class="fa fa-file-image"></i> Upload your profile picture
+        </div>
+    </div>
+    
+    <div class="relative flex text-gray-500 focus-within:text-purple-600">
+        <input hx-preserve
+            type="file"
+            id="profile_pic" 
+            name="upload" 
+            class="overflow-hidden block w-full rounded-0 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" 
+            aria-describedby="profile_pic_help" 
+            hx-encoding="multipart/form-data"
+            hx-post="/admin/user/picupload"
+            hx-push-url="false"
+            hx-trigger="change"
+            hx-target="#pic-upload"
+        >
+    </div>
+</label>
+    {{ with .Errors.Upload }} 
+    <p class="text-red-500 text-xs pt-1">{{ . }}</p>
+    {{ end }}
+    
+    <div class="my-1 text-xs text-end text-gray-500 dark:text-gray-300" id="profile_pic_help">
+        Add a profile picture. *.jpg, *.jpeg, *.png files only
+    </div>
+    {{ end }}
+</div>
+{{ end }}

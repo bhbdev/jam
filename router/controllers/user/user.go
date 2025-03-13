@@ -26,7 +26,7 @@ func UserList(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		logger.Error("UserList error", "error", err)
 	}
-	logger.Info("UserList", "users", users)
+	logger.Info("UserList", "users!!!", len(users))
 
 	p.Data["Users"] = users
 	p.Data["Params"] = params
@@ -38,13 +38,12 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 
 	urlId := r.PathValue("id")
 	isEditing := urlId != ""
-
 	p := page.New(r.Context())
 	p.SetPageActive("/admin/user")
 	p.Data["FormAction"] = r.URL.Path
 	p.Data["IsEditing"] = isEditing
 
-	var user *models.User
+	user := &models.User{}
 
 	if isEditing {
 		id, err := strconv.Atoi(urlId)
@@ -61,6 +60,7 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
+
 	p.Data["User"] = user
 
 	if r.Method == http.MethodGet {
@@ -68,12 +68,13 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	logger.Info("UserForm", "POST", r.PostFormValue("first_name"))
 	// handle POST
-	user.FirstName = r.PostFormValue("firstName")
-	user.LastName = r.PostFormValue("lastName")
+	user.FirstName = r.PostFormValue("first_name")
+	user.LastName = r.PostFormValue("last_name")
 	user.Email = r.PostFormValue("email")
 	user.Status = models.UserStatus(r.PostFormValue("status"))
-	user.ProfileImage = r.PostFormValue("profileImage")
+	user.ProfileImage = r.PostFormValue("profile_image")
 
 	oldPassword := user.Password
 	if newPassword := r.PostFormValue("password"); newPassword != "" {
@@ -92,8 +93,8 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 
 	err := p.Services.UserService.Save(r.Context(), user)
 	if err != nil {
-		logger.Error("JobAppForm error saving jobapp", "error", err)
-		p.AddError("alert", "Error saving job application")
+		logger.Error("UserForm error saving user", "error", err)
+		p.AddError("alert", "Error saving user")
 		p.Render(w, tpl)
 		return
 	}
@@ -108,5 +109,5 @@ func UserForm(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	http.Redirect(w, r, "/admin/user", http.StatusSeeOther)
+	http.Redirect(w, r, "/admin/user/list", http.StatusSeeOther)
 }

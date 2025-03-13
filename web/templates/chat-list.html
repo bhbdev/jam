@@ -4,13 +4,13 @@
         {{ if eq .Chat.Message.Role "assistant" }}
         <div class="flex w-full mt-2 space-x-3 max-w-4xl">
         <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-300">
-            <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Leo" />
+            <img src="/assets/img/jam.png" class="w-10 h-10" alt="JAMBot" />
         </div>
         <div>
-            <div class="bg-gray-500 p-3 rounded-r-lg rounded-bl-lg">
-            <p class="text-sm" id="{{.Chat.Message.ID}}">
+            <div class="bg-gray-500 dark:bg-gray-700 p-3 rounded-r-lg rounded-bl-lg">
+                <div class="text-sm text-white" id="{{.Chat.Message.ID}}">
                 {{.Chat.Message.Content}}
-            </p>
+                </div>
             </div>
             <span class="text-xs text-gray-500 leading-none">{{.CreatedAt}}</span>
         </div>
